@@ -1,3 +1,4 @@
+### Import packages 
 import numpy as np
 from numpy.linalg import inv
 from numpy.random import normal
@@ -11,15 +12,12 @@ from scipy import interpolate
 import matplotlib 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-
-
 import mcfit
-
 from operator import itemgetter 
 import emcee
 
 from classy import Class
-#import Class
+
 def log_interp1d(xx, yy, kind='linear',bounds_error=False,fill_value='extrapolate'):
     '''
     log-log interpolation
@@ -117,51 +115,6 @@ def survey_pars(survey):
         n = 1e-4
         bias = 2.
         beta = 0.4
-    # elif survey == 'BOSS_CMASS':
-    #     zcent = 0.57
-    #     V_inbins = 3.7044e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128#29
-    #     n = 2.1e-4#(Mpc/h)^-3 
-    #     bias = 1.85
-    #     beta = 0.4225
-    # elif survey == 'ELG_0.75':
-    #     zcent = 0.75
-    #     V_inbins = 6.8e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 4.22e-4#(Mpc/h)^-3 
-    #     bias = 1.95
-    #     beta = 0.451
-    # elif survey == 'ELG_1.25':
-    #     zcent = 1.25
-    #     V_inbins = 4.01e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 3.31e-4#(Mpc/h)^-3
-    #     bias = 2.42
-    #     beta = 0.233
-    # elif survey == 'LRG_0.55':
-    #     zcent = 0.55
-    #     V_inbins = 4.24e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 4.84e-4#(Mpc/h)^-3
-    #     bias = 3.6
-    #     beta = 0.234
-    # elif survey == 'ELG_1.25':
-    #     zcent = 1.25
-    #     V_inbins = 4.01e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 138.34e-4#(Mpc/h)^-3 
-    #     bias = 3.6
-    #     beta = 0.233
     elif survey == 'ELG_1.25':
         zcent = 1.25
         V_inbins = 4.01e9 #(Mpc/h)^3
@@ -180,15 +133,6 @@ def survey_pars(survey):
         n = 4.84e-4#(Mpc/h)^-3
         bias = 2.16
         beta = 0.234
-    # elif survey == 'LRG_0.65':
-    #     zcent = 0.65
-    #     V_inbins = 1.76e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 1.21e-4#(Mpc/h)^-3
-    #     bias = 3.77
-    #     beta = 0.223
     elif survey == 'QSO_1.25':
         zcent = 1.25
         V_inbins = 17.707e9#(Mpc/h)^3
@@ -198,24 +142,6 @@ def survey_pars(survey):
         n = 5.223e-4#(Mpc/h)^-3
         bias = 2.06
         beta = 0.194
-    # elif survey == 'DESII_2.25':
-    #     zcent = 2.25
-    #     V_inbins = 12.03e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 2.95e-4#(Mpc/h)^-3
-    #     bias = 2.44
-    #     beta = 0.160
-    # elif survey == 'QSO_1.85':
-    #     zcent = 1.85
-    #     V_inbins = 0.7e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 0.3e-4#(Mpc/h)^-3
-    #     bias = 4.32
-    #     beta = 0.194
     elif survey == 'Mega_2.25':
         zcent = 2.25
         V_inbins = 10.87e9 #(Mpc/h)^3
@@ -234,150 +160,6 @@ def survey_pars(survey):
         n = 2.77e-4#(Mpc/h)^-3
         bias = 2.12
         beta = 0.160
-    # elif survey == 'LRG_0.55':
-    #     zcent = 0.55
-    #     V_inbins = 4.24e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 23.68e-4#(Mpc/h)^-3  #updated Aug 26
-    #     bias = 3.6
-    #     beta = 0.234
-    # elif survey == 'QSO_1.65':
-    #     zcent = 1.65
-    #     V_inbins = 1.4e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 0.711e-4#(Mpc/h)^-3 
-    #     bias = 4.03
-    #     beta = 0.208
-    # elif survey == 'QSO_1.75':
-    #     zcent = 1.75
-    #     V_inbins = 0.47e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 3.55e-4#(Mpc/h)^-3 
-    #     bias = 4.17
-    #     beta = 0.201
-    # elif survey == 'QSO_1.85':
-    #     zcent = 1.85
-    #     V_inbins = 0.7e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 10.98e-4#(Mpc/h)^-3
-    #     bias = 4.32
-    #     beta = 0.194
-    # elif survey == 'QSOL_1.75':
-    #     zcent = 1.75
-    #     V_inbins = 4.7e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 3.55e-4#(Mpc/h)^-3 
-    #     bias = 4.17
-    #     beta = 0.201
-    # elif survey == 'BOSS_CMASS_0.65':
-    #     zcent = 0.75
-    #     V_inbins = 3.7044e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128#29
-    #     n = 2.1e-4#(Mpc/h)^-3 
-    #     bias = 1.85
-    #     beta = 0.4225
-    # elif survey == 'BOSS_LOWZ':
-    #     zcent = 0.32
-    #     V_inbins = 1.2691e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 2.85e-4#(Mpc/h)^-3 
-    #     bias = 1.85
-    #     beta = 0.3743
-    # elif survey == 'BOSS_LOWZ_0.65':
-    #     zcent = 0.65
-    #     V_inbins = 1.2691e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 2.85e-4#(Mpc/h)^-3 
-    #     bias = 1.85
-    #     beta = 0.3743
-    # elif survey == 'DESI_0.8':
-    #     zcent = 0.8
-    #     V_inbins = 6.8e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 1.226e-3#(Mpc/h)^-3 
-    #     bias = 1.86
-    #     beta = 0.451
-    # elif survey == 'QSO_1.25':
-    #     zcent = 1.25
-    #     V_inbins = 15.75e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 5.223e-4#(Mpc/h)^-3
-    #     bias = 3.59
-    #     beta = 0.194
-    # elif survey == 'Mega_2.25':
-    #     zcent = 2.25
-    #     V_inbins = 13.04e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 6.62e-4#(Mpc/h)^-3
-    #     bias = 2.5
-    #     beta = 0.160
-  #  elif survey == 'DESI_0.65':
-    #     zcent = 0.65
-    #     V_inbins = 6.8e9 #(Mpc/h)^3
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 1.226e-3#(Mpc/h)^-3 
-    #     bias = 1.86
-    #     beta = 0.451
-    # elif survey == 'DESI_1.0':
-    #     zcent = 1.0
-    #     V_inbins = 8.73e9 #(Mpc/h)^3 
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 6.41e-4 #(Mpc/h)^-3 
-    #     bias = 1.5
-    #     beta = 0.5831
-    # elif survey == 'DESI_1.05':
-    #     zcent = 1.05
-    #     V_inbins = 8.73e9 #(Mpc/h)^3 
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 6.41e-4 #(Mpc/h)^-3 
-    #     bias = 1.5
-    #     beta = 0.5831
-    # elif survey == 'DESI_1.25':
-    #     zcent = 1.25
-    #     V_inbins = 8.73e9 #(Mpc/h)^3 
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 6.41e-4 #(Mpc/h)^-3 
-    #     bias = 1.5
-    #     beta = 0.5831
-    # elif survey == 'DESI_1.65':
-    #     zcent = 1.65
-    #     V_inbins = 8.73e9 #(Mpc/h)^3 
-    #     khmin = 0.01
-    #     khmax = 0.3
-    #     nk = 128
-    #     n = 6.41e-4 #(Mpc/h)^-3 
-    #     bias = 1.5
-    #     beta = 0.5831
     else:
         raise TypeError('Please use an option between: survey = "example","BOSS_CMASS","BOSS_LOWZ","DESI_0.8","DESI_1.0" ')
         
@@ -395,7 +177,6 @@ def fiducial(SURVEY,hexadecapole,recon):
     In this case, it corresponds to: alpha_perp,alpha_par,B,beta,a_ell^{1-5},sigma_fog, Sigma_perp,Sigma_par
     '''
     zcent,V_inbins,kh,dkh,n,bias,beta = survey_pars(survey=SURVEY)
-    #a04 = 1./n
     if recon:
         Sigma_par = 4.
         Sigma_perp = 2.
@@ -410,7 +191,7 @@ def fiducial(SURVEY,hexadecapole,recon):
 
 
 def fitting(r0,r1,dire):
-
+    ### define a fitting fucntion ###
     iCF = dire['iCF']
     iPk = dire['iPk']
     rvec = dire['rvec']
@@ -430,6 +211,7 @@ def fitting(r0,r1,dire):
 
 
 def get_templates(COSMO,z,hfid=None,r0bounds=None,r1bounds=None):
+    """ Claculate template for PK """
     Nk=4096
     kmin = 1e-5
     kmax = 20.
@@ -508,89 +290,6 @@ def get_templates(COSMO,z,hfid=None,r0bounds=None,r1bounds=None):
     iPk_nw = semilogx_interp1d(kkvec,Pk_nw,kind='cubic',fill_value='extrapolate',bounds_error=False)
     
     iOlin = semilogx_interp1d(kkvec,iPk(kkvec)/iPk_nw(kkvec),kind='cubic',fill_value='extrapolate',bounds_error=False)
-    #return iPkh, iPkh_nw, iCFh, iCFh_nw
-    return iPk_nw, iOlin
-
-def get_templatesk04(COSMO,z,hfid=None,r0bounds=None,r1bounds=None):
-    Nk=4096
-    kmin = 0.0010
-    kmax = 20.
-    factor=0.01
-    
-    kmax_class = 3.
-    
-    kh = np.logspace(np.log10(kmin),np.log10(kmax_class),Nk) 
-    pk = np.zeros(Nk)
-    if not hfid:
-        k = kh*COSMO.h() #so here the kh does not have unit of h. 
-        for ik in range(Nk):
-            pk[ik] = COSMO.pk(k[ik],z)
-        Pkh = pk*COSMO.h()**3
-    else:
-        k = kh*hfid
-        for ik in range(Nk):
-            pk[ik] = COSMO.pk(k[ik],z)
-        Pkh = pk*hfid**3
-    iPk = log_interp1d(kh,Pkh,kind='cubic',fill_value='extrapolate',bounds_error=False)
-    
-    kh = np.logspace(np.log10(kmin),np.log10(kmax),Nk) #The previous kh up to k_max (not k_max class)
-    Pkh = iPk(kh)
-    iPk = log_interp1d(kh,Pkh,kind='cubic',fill_value='extrapolate',bounds_error=False)    #Probably not needed, but for consistency                               
-                               
-    #Fourier Transform to get it to CF
-    ft = mcfit.P2xi(kh, l=0, lowring=True)
-    rvec, CF = ft(Pkh, extrap=True)
-    iCF = semilogx_interp1d(rvec,CF,kind='cubic',bounds_error=False,fill_value='extrapolate')
-    kdum = np.logspace(-4,-3,1000)
-    dire = dict(iCF=iCF,iPk=iPk,rvec=rvec,kdum=kdum)
-    
-    if not r0bounds:
-        r0_vec = np.linspace(60,69,40)
-    else:
-        r0_vec = np.linspace(r0bounds[0],r0bounds[1],40)
-    res = np.zeros(len(r0_vec))
-    r1 = np.zeros(len(r0_vec))
-    if not r1bounds:
-        r1b_1,r1b_2 = 200,300
-    else:
-        r1b_1,r1b_2 = r1bounds[0],r1bounds[1]
-    for i in range(len(r0_vec)):
-        r1_1 = r1b_1
-        r1_2 = r1b_2
-        for j in range(150):
-            res1 = fitting(r0_vec[i],r1_1,dire)
-            res2 = fitting(r0_vec[i],r1_2,dire)
-            
-            dr = (r1_2-r1_1)
-            if res1 > res2:
-                r1_1 = r1_1 + 0.5*dr
-                res[i] = res2
-
-            elif res2 > res1:
-                r1_2 = r1_2 - 0.5*dr
-                res[i] = res1
-
-            else:
-                r1[i] = r1_1
-                res[i] = res1
-                break
-            r1[i] = 0.5*(r1_1+r1_2)
-    
-    indr = np.argmin(res)
-    r0,r1 = r0_vec[indr],r1[indr]
-
-    ind=np.concatenate((np.where(rvec<=r0)[0],np.where(rvec>=r1)[0]))
-    
-    CF_nw = semilogx_interp1d(rvec[ind],rvec[ind]**2*iCF(rvec[ind]),
-                               kind='cubic',fill_value='extrapolate',bounds_error=False)(rvec)/(rvec**2)
-    
-    #Undo the FT to get the unwiggled Pk (use rh to avoid ringing)
-    ift = mcfit.xi2P(rvec, l=0, lowring=True)
-    kkvec, Pk_nw = ift(CF_nw, extrap=True)
-    iPk_nw = semilogx_interp1d(kkvec,Pk_nw,kind='cubic',fill_value='extrapolate',bounds_error=False)
-    
-    iOlin = semilogx_interp1d(kkvec,iPk(kkvec)/iPk_nw(kkvec),kind='cubic',fill_value='extrapolate',bounds_error=False)
-    #return iPkh, iPkh_nw, iCFh, iCFh_nw
     return iPk_nw, iOlin
     
 def smoothing_function(interpolation_points, pk_camb, degree=13, sigma=1, weight=0.5, **kwargs):
@@ -614,6 +313,7 @@ def create_Pmsm_template(interpolation_points,pk_camb,smooth_factor):
     return Pmsm
     
 def get_templates_barry(COSMO,z,hfid=None,r0bounds=None,r1bounds=None):
+    """ Claculate template for PK using Barry method (Hinton 2017) """
     Nk=4096*10
     kmin = 1e-5
     kmax = 20.
@@ -636,7 +336,7 @@ def get_templates_barry(COSMO,z,hfid=None,r0bounds=None,r1bounds=None):
 
     iPk = log_interp1d(kh,Pkh,kind='cubic',fill_value='extrapolate',bounds_error=False)
 
-    kh = np.logspace(np.log10(kmin),np.log10(kmax),Nk) #The previous kh up to k_max (not k_max class)
+    kh = np.logspace(np.log10(kmin),np.log10(kmax),Nk) 
     Pkh = iPk(kh)
 
     iPk_nw = create_Pmsm_template(kh,Pkh,smooth_factor=20)
@@ -644,6 +344,7 @@ def get_templates_barry(COSMO,z,hfid=None,r0bounds=None,r1bounds=None):
     return iPk_nw, iOlin
     
 def get_templates_my_horn(kh,Pkh,hfid=None,h_horn=None):
+    """ Claculate template for PK in the modified gravity models using Barry smoothing moethd"""
     Nk=4096
     kmin = 1e-4 #1e-5
     kmax = 0.29 #20.
@@ -654,170 +355,16 @@ def get_templates_my_horn(kh,Pkh,hfid=None,h_horn=None):
     kh = kh*h_horn/hfid
     Pkh = Pkh*hfid**3/h_horn**3
 
-    iPk = interpolate.UnivariateSpline(kh,Pkh, s=20 ) #interp1d(kh, Pkh, kind='cubic') #
-   # iPk = log_interp1d(kh,Pkh,kind='cubic',fill_value='extrapolate',bounds_error=False)
-   # kh = np.logspace(np.log10(kmin),np.log10(kmax),Nk)
+    iPk = interpolate.UnivariateSpline(kh,Pkh, s=20 ) 
     Pkh2 = iPk(kh)
     iPk_nw = create_Pmsm_template(kh,Pkh,smooth_factor=20)
-   # plt.plot(kh,iPk_nw(kh))
 
     iOlin = semilogx_interp1d(kh,iPk(kh)/iPk_nw(kh),kind='cubic',fill_value='extrapolate',bounds_error=False)
     return iPk_nw, iOlin
     
-def get_templatesh(COSMO,z,hfid=None,hh=None,r0bounds=None,r1bounds=None):
-    Nk=4096
-    kmin = 1e-5
-    kmax = 20.
-    factor=0.01
-    
-    kmax_class = 3.
-    
-    kh = np.logspace(np.log10(kmin),np.log10(kmax_class),Nk) 
-    pk = np.zeros(Nk)
-    if not hfid:
-        k = kh*hh #so here the kh does not have unit of h. 
-        for ik in range(Nk):
-            pk[ik] = COSMO.pk(k[ik],z)
-        Pkh = pk*hh**3
-    else:
-        k = kh*hfid
-        for ik in range(Nk):
-            pk[ik] = COSMO.pk(k[ik],z)
-        Pkh = pk*hfid**3
-    iPk = log_interp1d(kh,Pkh,kind='cubic',fill_value='extrapolate',bounds_error=False)
-    
-    kh = np.logspace(np.log10(kmin),np.log10(kmax),Nk) #The previous kh up to k_max (not k_max class)
-    Pkh = iPk(kh)
-    iPk = log_interp1d(kh,Pkh,kind='cubic',fill_value='extrapolate',bounds_error=False)    #Probably not needed, but for consistency                               
-                               
-    #Fourier Transform to get it to CF
-    ft = mcfit.P2xi(kh, l=0, lowring=True)
-    rvec, CF = ft(Pkh, extrap=True)
-    iCF = semilogx_interp1d(rvec,CF,kind='cubic',bounds_error=False,fill_value='extrapolate')
-    kdum = np.logspace(-4,-3,1000)
-    dire = dict(iCF=iCF,iPk=iPk,rvec=rvec,kdum=kdum)
-    
-    if not r0bounds:
-        r0_vec = np.linspace(60,69,40)
-    else:
-        r0_vec = np.linspace(r0bounds[0],r0bounds[1],40)
-    res = np.zeros(len(r0_vec))
-    r1 = np.zeros(len(r0_vec))
-    if not r1bounds:
-        r1b_1,r1b_2 = 200,300
-    else:
-        r1b_1,r1b_2 = r1bounds[0],r1bounds[1]
-    for i in range(len(r0_vec)):
-        r1_1 = r1b_1
-        r1_2 = r1b_2
-        for j in range(150):
-            res1 = fitting(r0_vec[i],r1_1,dire)
-            res2 = fitting(r0_vec[i],r1_2,dire)
-            
-            dr = (r1_2-r1_1)
-            if res1 > res2:
-                r1_1 = r1_1 + 0.5*dr
-                res[i] = res2
 
-            elif res2 > res1:
-                r1_2 = r1_2 - 0.5*dr
-                res[i] = res1
-
-            else:
-                r1[i] = r1_1
-                res[i] = res1
-                break
-            r1[i] = 0.5*(r1_1+r1_2)
-    
-    indr = np.argmin(res)
-    r0,r1 = r0_vec[indr],r1[indr]
-
-    ind=np.concatenate((np.where(rvec<=r0)[0],np.where(rvec>=r1)[0]))
-    
-    CF_nw = semilogx_interp1d(rvec[ind],rvec[ind]**2*iCF(rvec[ind]),
-                               kind='cubic',fill_value='extrapolate',bounds_error=False)(rvec)/(rvec**2)
-    
-    #Undo the FT to get the unwiggled Pk (use rh to avoid ringing)
-    ift = mcfit.xi2P(rvec, l=0, lowring=True)
-    kkvec, Pk_nw = ift(CF_nw, extrap=True)
-    iPk_nw = semilogx_interp1d(kkvec,Pk_nw,kind='cubic',fill_value='extrapolate',bounds_error=False)
-    
-    iOlin = semilogx_interp1d(kkvec,iPk(kkvec)/iPk_nw(kkvec),kind='cubic',fill_value='extrapolate',bounds_error=False)
-    #return iPkh, iPkh_nw, iCFh, iCFh_nw
-    return iPk_nw, iOlin
-def get_templates_camb(plin_camb,z,hfid=None,r0bounds=None,r1bounds=None):
-    Nk=4096
-    kmin = 1e-5
-    kmax = 20.
-    factor=0.01
-
-    kmax_class = 3.
-
-    Pkh = plin_camb
-    kh = np.logspace(np.log10(kmin),np.log10(kmax_class),Nk)
-
-    iPk = log_interp1d(kh,Pkh,kind='cubic',fill_value='extrapolate',bounds_error=False)
-    
-    kh = np.logspace(np.log10(kmin),np.log10(kmax),Nk) #The previous kh up to k_max (not k_max class)
-    Pkh = iPk(kh)
-    iPk = log_interp1d(kh,Pkh,kind='cubic',fill_value='extrapolate',bounds_error=False)    #Probably not needed, but for consistency                               
-                               
-    #Fourier Transform to get it to CF
-    ft = mcfit.P2xi(kh, l=0, lowring=True)
-    rvec, CF = ft(Pkh, extrap=True)
-    iCF = semilogx_interp1d(rvec,CF,kind='cubic',bounds_error=False,fill_value='extrapolate')
-    kdum = np.logspace(-4,-3,1000)
-    dire = dict(iCF=iCF,iPk=iPk,rvec=rvec,kdum=kdum)
-    
-    if not r0bounds:
-        r0_vec = np.linspace(60,69,40)
-    else:
-        r0_vec = np.linspace(r0bounds[0],r0bounds[1],40)
-    res = np.zeros(len(r0_vec))
-    r1 = np.zeros(len(r0_vec))
-    if not r1bounds:
-        r1b_1,r1b_2 = 200,300
-    else:
-        r1b_1,r1b_2 = r1bounds[0],r1bounds[1]
-    for i in range(len(r0_vec)):
-        r1_1 = r1b_1
-        r1_2 = r1b_2
-        for j in range(150):
-            res1 = fitting(r0_vec[i],r1_1,dire)
-            res2 = fitting(r0_vec[i],r1_2,dire)
-            
-            dr = (r1_2-r1_1)
-            if res1 > res2:
-                r1_1 = r1_1 + 0.5*dr
-                res[i] = res2
-
-            elif res2 > res1:
-                r1_2 = r1_2 - 0.5*dr
-                res[i] = res1
-
-            else:
-                r1[i] = r1_1
-                res[i] = res1
-                break
-            r1[i] = 0.5*(r1_1+r1_2)
-    
-    indr = np.argmin(res)
-    r0,r1 = r0_vec[indr],r1[indr]
-
-    ind=np.concatenate((np.where(rvec<=r0)[0],np.where(rvec>=r1)[0]))
-    
-    CF_nw = semilogx_interp1d(rvec[ind],rvec[ind]**2*iCF(rvec[ind]),
-                               kind='cubic',fill_value='extrapolate',bounds_error=False)(rvec)/(rvec**2)
-    
-    #Undo the FT to get the unwiggled Pk (use rh to avoid ringing)
-    ift = mcfit.xi2P(rvec, l=0, lowring=True)
-    kkvec, Pk_nw = ift(CF_nw, extrap=True)
-    iPk_nw = semilogx_interp1d(kkvec,Pk_nw,kind='cubic',fill_value='extrapolate',bounds_error=False)
-    
-    iOlin = semilogx_interp1d(kkvec,iPk(kkvec)/iPk_nw(kkvec),kind='cubic',fill_value='extrapolate',bounds_error=False)
-    #return iPkh, iPkh_nw, iCFh, iCFh_nw
-    return iPk_nw, iOlin, iPk
 def get_templates_horn(kh,Pkh,z,hfid=None,h_horn=None,r0bounds=None,r1bounds=None):
+    """ Claculate template for PK in the modified-gravity models using Config smoothing method"""
     Nk=4096
     kmin = 1e-5
     kmax = 20.
@@ -825,20 +372,9 @@ def get_templates_horn(kh,Pkh,z,hfid=None,h_horn=None,r0bounds=None,r1bounds=Non
     
     kmax_class = 3.
     
-   # kh = kh#np.logspace(np.log10(kmin),np.log10(kmax_class),Nk) 
-    # pk = np.zeros(Nk)
-     #if not hfid:
-    #     k = kh*COSMO.h() #so here the kh does not have unit of h. 
-    #     for ik in range(Nk):
-    #         pk[ik] = COSMO.pk(k[ik],z)
-    #     Pkh = pk*COSMO.h()**3
-    # else:
     kh = kh*h_horn/hfid #first get rid of unit h. Then add a unit of hfid. 
     Pkh = Pkh*hfid**3/h_horn**3
- #   iPk = log_interp1d(kh,Pkh,kind='cubic',fill_value='extrapolate',bounds_error=False)
-    
-   # kh = np.logspace(np.log10(kmin),np.log10(kmax),Nk) #The previous kh up to k_max (not k_max class)
-  #  Pkh = iPk(kh)
+
     iPk = log_interp1d(kh,Pkh,kind='cubic',fill_value='extrapolate',bounds_error=False)    #Probably not needed, but for consistency                               
                                
     #Fourier Transform to get it to CF
@@ -1128,7 +664,7 @@ def lkl_pk_k04(theta,k,datPk,invcovmat,iPk_nw,iOlin,hexadecapole,recon):
     chi2 = np.dot(np.dot(Pmul-datPk,invcovmat),Pmul-datPk)
 
     return -0.5*chi2
-#probsu
+
 def lnprob(theta, k,datPk,invcovmat,iPk_nw,iOlin,hexadecapole,recon,prior_min,prior_max,n,Pshot_T):
 
     lp = lnprior(theta, prior_min, prior_max)
