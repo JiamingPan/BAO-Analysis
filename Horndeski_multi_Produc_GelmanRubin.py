@@ -32,7 +32,7 @@ from scipy.special import legendre
 from scipy.integrate import quad
 import logging
 from scipy import integrate, interpolate, optimize
-import Bernal_tool as BER
+import BAO_tool as BER
 from scipy import interpolate
 from scipy.stats import linregress
 
