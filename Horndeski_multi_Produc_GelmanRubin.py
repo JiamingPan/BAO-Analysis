@@ -1,12 +1,7 @@
-import camb
-from camb import model, initialpower
-from scipy import stats
 import pandas as pd
 import emcee
 import corner
 import sys, platform, os
-from scipy.stats import norminvgauss
-from scipy.stats import invgauss
 import numpy as np
 from scipy import interpolate
 from scipy.optimize import curve_fit
@@ -15,8 +10,6 @@ import math
 import configparser
 import os, shutil, configparser
 import os, sys
-import stat
-from scipy import stats
 from scipy.interpolate import interp1d
 import time
 import scienceplots
