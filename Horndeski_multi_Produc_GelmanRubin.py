@@ -1,8 +1,5 @@
 import camb
 from camb import model, initialpower
-import matplotlib
-from matplotlib import rc
-import matplotlib.pyplot as plt
 from scipy import stats
 import pandas as pd
 import emcee
@@ -10,8 +7,6 @@ import corner
 import sys, platform, os
 from scipy.stats import norminvgauss
 from scipy.stats import invgauss
-import matplotlib
-from matplotlib import pyplot as plt
 import numpy as np
 from scipy import interpolate
 from scipy.optimize import curve_fit
@@ -45,9 +40,6 @@ from scipy.special import legendre
 from scipy.signal import find_peaks
 from scipy.linalg import eig
 
-import matplotlib 
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 import mcfit
 from operator import itemgetter 
 import emcee
